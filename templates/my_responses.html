@@ -1,0 +1,79 @@
+{% block title %}
+Отклики
+<p><a href="{% url 'profile' user.id %}">Мой профиль</a></p>
+
+{% for response in accepted_responses %}
+  <a href="{% url 'response_delete' response.id %}">Ударить отклик</a>
+{% endfor %}
+
+{% endblock title %}
+
+{% block content %}
+    <h2 style="font-weight: normal;"> Количество откликов: {{ page_obj.paginator.count }} </h2>
+    <p>Сегодня: {{ time_now|date:'d M Y' }}</p>
+
+    <a href="{% url 'accepted_responses' %}">Принятые отклики ({{ accepted_count }})</a>
+
+
+
+    {% if page_obj %}
+        <table cellspacing="10">
+            <tr>
+                <td>Отклик</td>
+                <td>Дата публикации</td>
+                <td>Автор</td>
+                <td>Действия</td>  <!-- Новая колонка для действий -->
+        </tr>
+        {% for response in page_obj %}
+            <tr>
+                <td>
+                    {% if response.id %}
+                        <a href="{% url 'response_detail' response.id %}">{{ response.response }}</a>
+                    {% endif %}
+                </td>
+                <td>{{ response.response_origin|date:'d M Y' }}</td>
+                <td>{{ response.sender.username }}</td>
+                    <td>
+                    {% if response.status %}
+                        <a href="{% url 'response_delete' response.id %}">Удалить отклик</a>
+                    {% else %}
+                        <a href="{% url 'response_accept' response.id %}">Принять отклик</a>
+                    {% endif %}
+                    </td>
+
+
+                </td>
+            </tr>
+        {% endfor %}
+            {% for post in page_obj %}
+                <tr>
+                    <td>
+                        {% if post.id %}  <!-- Проверка, чтобы избежать пустого pk -->
+                            <a href="{% url 'poster_detail' post.id %}">{{ post.head }}</a>  <!-- Добавлен заголовок в ссылку (предполагая поле head) -->
+                        {% endif %}
+                    </td>
+                    <td>{{ post.poster_origin|date:'d M Y' }}</td>
+                    <td>{{ post.user.username }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Откликов нет!</h2>
+    {% endif %}
+
+    <a href="?page=1">&laquo;first</a>
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+
+    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+    {% endif %}
+
+    {% if page_obj.number < page_obj.paginator.num_pages %}
+        <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
+    {% endif %}
+{% endblock content %}

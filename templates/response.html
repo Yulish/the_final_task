@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отклик на объявление</title>
+</head>
+<body>
+    <h1>Отклик на объявление: {{ poster.title }}</h1>  <!-- Детали постера из контекста -->
+    <p>{{ poster.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Форма ResponseForm (поле text) -->
+        <button type="submit">Отправить отклик</button>
+    </form>
+
+    <a href="{% url 'poster_detail' poster.pk %}">Вернуться к объявлению</a>
+</body>
+</html>

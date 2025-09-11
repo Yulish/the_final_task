@@ -1,0 +1,61 @@
+{% block content %}
+
+    <h2 style="font-weight: normal;"> Количество новостей в категории {{ category.name }}: {{ page_obj.paginator.count }} </h2>
+    <p>Сегодня: {{ time_now|date:'d M Y' }}</p>
+
+    <p1><a href="{% url 'posters' %}">Все новости</a></p1>
+
+    <div class="categories">
+        <h3>📂 Новости в других категориях:</h3>
+        {% for category in categories %}
+            <li style="margin-bottom: 5px; display: flex; align-items: center; gap: 10px;">
+                <a href="{% url 'category_list' category.id %}"
+                   style="text-decoration: none; color: #007bff; font-weight: 500;">
+                    {{ category.name }}
+                </a>
+            </li>
+        {% empty %}
+            <li> Нет категорий</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+    {% if page_obj %}
+        <table cellspacing="10">
+            <tr>
+                <td>Заголовок</td>
+                <td>Дата публикации</td>
+                <td>Аннотация</td>
+                <td>Автор</td>
+            </tr>
+            {% for post in page_obj %}
+                <tr>
+                    <td><a href="{% url 'poster_detail' post.id %}">{{ post.head}}</a></td>
+                    <td>{{ post.post_origin|date:'d M Y' }}</td>
+                    <td>{{ post.text|truncatewords:20}}</td>
+                    <td>{{ post.user.username }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+
+    <a href="?page=1">&laquo;first</a>
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+
+    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+    {% endif %}
+
+    {% if page_obj.number < page_obj.paginator.num_pages %}
+        <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
+    {% endif %}
+{% endblock content %}

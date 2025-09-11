@@ -1,0 +1,15 @@
+img {
+    max-width: 640px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+video {
+    max-width: 640px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}

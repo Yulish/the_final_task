@@ -1,0 +1,9 @@
+img, video {
+    controls: visible !important;
+    max-width: 640px !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 10px auto !important;
+}
+

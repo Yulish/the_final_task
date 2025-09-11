@@ -1,0 +1,23 @@
+{% block content %}
+<p><a href="{% url 'profile' user.id %}">Мой профиль</a></p>
+<p><a href="{% url 'responses' user.id %}">Отклики на мои объявления</a></p>
+    <h2>Принятые отклики </h2>
+
+    {% if accepted_responses %}
+        <ul>
+            {% for resp in accepted_responses %}
+                <li>
+                    {{ resp.response }} — {{ resp.sender.username }} — {{ resp.response_origin|date:"d M Y" }}
+                    <a href="{% url 'poster_detail' resp.poster.id %}"> на объявление</a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет откликов.</p>
+    {% endif %}
+{% endblock %}
+
+
+
+
