@@ -27,14 +27,12 @@
             <tr>
                 <td>Заголовок</td>
                 <td>Дата публикации</td>
-                <td>Аннотация</td>
                 <td>Автор</td>
             </tr>
             {% for post in page_obj %}
                 <tr>
                     <td><a href="{% url 'poster_detail' post.id %}">{{ post.head}}</a></td>
                     <td>{{ post.post_origin|date:'d M Y' }}</td>
-                    <td>{{ post.text|truncatewords:20}}</td>
                     <td>{{ post.user.username }}</td>
                 </tr>
             {% endfor %}

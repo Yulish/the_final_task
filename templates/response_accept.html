@@ -6,16 +6,16 @@
 </head>
 <body>
     <h1>Принять отклик</h1>
-    <p><strong>Отклик:</strong> {{ response.text }}</p>  <!-- Детали отклика из контекста -->
-    <p><strong>От:</strong> {{ response.user.username }}</p>
-    <p><strong>Дата:</strong> {{ response.created_at|date:"d.m.Y" }}</p>
+    <p><strong><a href="{% url 'poster_detail' poster.id %}">На объявление:</a> {{ poster.head }}</strong></p>
+    <p><strong>От:</strong> {{ response.sender }}</p>
+    <p><strong>Отправленный:</strong> {{ response.response_origin|date:"d.m.Y" }}</p>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}  <!-- Форма ResponseAcceptForm (если есть поля, иначе просто кнопка) -->
-        <button type="submit">Принять отклик</button>
+        <p><button type="submit">Принять отклик</button></p>
     </form>
 
-    <a href="{% url 'poster_detail' response.poster.pk %}">Вернуться к объявлению</a>
+        <a href="{% url 'responses' user.id %}"> "Отклики на мои объявления"</a>
 </body>
 </html>

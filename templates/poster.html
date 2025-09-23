@@ -1,33 +1,33 @@
+
 {% block title %}
-Новости
+    {% if request.GET.user_id %}
+    {% else %}
+
+    {% endif %}
 {% endblock title %}
 
-
-
 {% block content %}
-    <p><a href="{% url 'profile' user.id %}">Мой профиль</a></p>
-    <h2 style="font-weight: normal;"> Количество новостей: {{ page_obj.paginator.count }} </h2>
+
+<h2 style="font-weight: normal;">
+
+    {% if request.GET.user_id %}
+        Количество моих объявлений: {{ page_obj.paginator.count }}
+    {% else %}
+        Количество объявлений: {{ page_obj.paginator.count }}
+    {% endif %}
+</h2>
+
     <p>Сегодня: {{ time_now|date:'d M Y' }}</p>
 
-    <p><a href="{% url 'posters' %}">Все новости</a></p>
+    <a href="{% url 'create' %}" style="display: block; margin-bottom: 20px;">Добавить объявление</a>
 
-    <div class="categories">
-        <p>📂 Категории новостей:</p>
-        <ul>  <!-- Добавлено открывающий <ul> -->
-            {% for category in categories %}
-                <li style="margin-bottom: 5px; display: flex; align-items: center; gap: 10px;">
-                    <a href="{% url 'category_list' category.id %}"
-                       style="text-decoration: none; color: #007bff; font-weight: 500;">
-                        {{ category.name }}
-                    </a>
-                </li>
-            {% empty %}
-                <li>Нет категорий</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <h3>Фильтры</h3>
+    <form method="get">
+        {{ filterset.form.as_p }}
+        <button type="submit" class="btn btn-primary">Применить фильтры</button>
+        <a href="{% url 'posters' %}" class="btn btn-primary">Сбросить фильтры</a>
 
-    <a href="{% url 'create' %}" style="display: block; margin-bottom: 20px;">Добавить новость</a>
+    </form>
 
     {% if page_obj %}
         <table cellspacing="10">
@@ -35,36 +35,55 @@
                 <td>Заголовок</td>
                 <td>Дата публикации</td>
                 <td>Автор</td>
+                <td>Категория</td>
             </tr>
+            <p>
             {% for post in page_obj %}
                 <tr>
                     <td>
-                        {% if post.id %}  <!-- Проверка, чтобы избежать пустого pk -->
-                            <a href="{% url 'poster_detail' post.id %}">{{ post.head }}</a>  <!-- Добавлен заголовок в ссылку (предполагая поле head) -->
+                        {% if post.id %}
+                            <a href="{% url 'poster_detail' post.id %}">{{ post.head }}</a>
                         {% endif %}
                     </td>
                     <td>{{ post.poster_origin|date:'d M Y' }}</td>
+                    </td>
                     <td>{{ post.user.username }}</td>
+                    <td>
+                        {% for category in post.categories.all %}
+                        {{ category.name }}
+                        {% empty %}-{% endfor %}
+                    </td>
+
                 </tr>
             {% endfor %}
+            </p>
         </table>
     {% else %}
-        <h2>Новостей нет!</h2>
+        <h2>
+            {% if request.GET.user_id %}
+                У тебя нет объявлений!
+            {% else %}
+                Объявлений нет!
+            {% endif %}
+        </h2>
     {% endif %}
 
-    <a href="?page=1">&laquo;first</a>
+    <!-- Пагинация с сохранением параметров (user_id и т.д.) -->
+    <a href="?{{ request.GET.urlencode }}&page=1">&laquo;first</a>
 
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+        <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
     {% endif %}
 
     Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
 
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+        <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
     {% endif %}
 
     {% if page_obj.number < page_obj.paginator.num_pages %}
-        <a href="?page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
+        <a href="?{{ request.GET.urlencode }}&page={{ page_obj.paginator.num_pages }}">last&raquo;</a>
     {% endif %}
 {% endblock content %}
+
+

@@ -1,7 +1,10 @@
+
+{% block content %}
 <h1>Отклик на <a href="{% url 'poster_detail' poster.id %}">Ваше объявление</a></h1>
 <p><strong>Текст:</strong> {{ response_id.response }}</p>
 <p><strong>Дата:</strong> {{ response_id.response_origin|date:"d M Y, H:i" }}</p>
 <p><strong>От:</strong> {{ response_id.sender}}</p>
 <p><strong>Статус:</strong> {% if response_id.status %}Принят{% else %}Не принят{% endif %}</p>
 
-<li><a href="{% url 'responses' user.id %}">Отклики на мои объявления</a></li>
+<a href="{% url 'response_delete' response_id.id %}">Удалить отклик</a>
+{% endblock content %}

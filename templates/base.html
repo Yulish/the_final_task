@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            .cke_editable img {
+                width: 50% !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+            .cke_editable video {
+                width: 50% !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+            .cke_editable iframe {
+                width: 50% !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
+        </style>
+
+        <link href="{% static 'ckeditor/ckeditor/skins/moono-lisa/content.css' %}" rel="stylesheet" type="text/css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title></title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        {% load static %}
+        <!-- Ваш кастомный CSS -->
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">THE FINAL PROJECT</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                       {% if request.resolver_match.url_name == 'posters' and request.GET.user_id == user.id|stringformat:"s" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a></li>
+                        {% elif request.resolver_match.url_name == 'posters' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}?user_id={{ user.id }}">Мои объявления</a>
+                        </li>
+                         <li>
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a></li>
+                        {% elif request.resolver_match.url_name == 'profile' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}?user_id={{ user.id }}">Мои объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a></li>
+
+                        {% elif request.resolver_match.url_name == 'posters' and request.GET.user_id == user.id|stringformat:"s" %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'posters' %}?user_id={{ user.id }}">Главная (мои объявления)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                        </li>
+                        <li><a href="{% url 'my_logout' %}">Выйти</a></li>
+                        {% elif request.resolver_match.url_name == 'responses' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}?user_id={{ user.id }}">Мои объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        {% elif request.resolver_match.url_name == 'accepted_responses' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}?user_id={{ user.id }}">Мои объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a></li>
+                        {% elif request.resolver_match.url_name == 'response_detail' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a></li>
+                        {% elif request.resolver_match.url_name == 'poster_detail' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'responses' user.id %}">Полученные отклики</a>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}?user_id={{ user.id }}">Мои объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'posters' %}">Все объявления</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Мой профиль</a>
+                        </li>
+                        <li><a class="nav-link" href="{% url 'my_logout' %}">Выйти</a>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Основной контент -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    {% block content %}
+                    {{ flatpage.content }}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- CKEditor JS -->
+        <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+        <script>
+            CKEDITOR.on('instanceReady', function(ev) {
+                const editor = ev.editor;
+                const imgs = editor.document.getElementsByTag('img');
+                const videos = editor.document.getElementsByTag('video');
+                const iframes = editor.document.getElementsByTag('iframe');
+                for (let img of imgs) {
+                    img.setAttribute('width', '50%');
+                    img.setAttribute('height', 'auto');
+                    img.setAttribute('style', 'max-width: 100% !important;');
+                }
+                for (let video of videos) {
+                    video.setAttribute('width', '50%');
+                    video.setAttribute('height', 'auto');
+                    video.setAttribute('style', 'max-width: 100% !important;');
+                }
+                for (let iframe of iframes) {
+                    iframe.setAttribute('width', '50%');
+                    iframe.setAttribute('height', 'auto');
+                    iframe.setAttribute('style', 'max-width: 100% !important;');
+                }
+                editor.on('afterPaste', function(e) {
+                    setTimeout(() => {
+                        const imgs = editor.document.getElementsByTag('img');
+                        const videos = editor.document.getElementsByTag('video');
+                        const iframes = editor.document.getElementsByTag('iframe');
+                        for (let img of imgs) {
+                            img.setAttribute('width', '50%');
+                            img.setAttribute('height', 'auto');
+                            img.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                        for (let video of videos) {
+                            video.setAttribute('width', '50%');
+                            video.setAttribute('height', 'auto');
+                            video.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                        for (let iframe of iframes) {
+                            iframe.setAttribute('width', '50%');
+                            iframe.setAttribute('height', 'auto');
+                            iframe.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                    }, 50);
+                });
+                editor.on('change', function() {
+                    setTimeout(() => {
+                        const imgs = editor.document.getElementsByTag('img');
+                        const videos = editor.document.getElementsByTag('video');
+                        const iframes = editor.document.getElementsByTag('iframe');
+                        for (let img of imgs) {
+                            img.setAttribute('width', '50%');
+                            img.setAttribute('height', 'auto');
+                            img.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                        for (let video of videos) {
+                            video.setAttribute('width', '50%');
+                            video.setAttribute('height', 'auto');
+                            video.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                        for (let iframe of iframes) {
+                            iframe.setAttribute('width', '50%');
+                            iframe.setAttribute('height', 'auto');
+                            iframe.setAttribute('style', 'max-width: 100% !important;');
+                        }
+                    }, 100);
+                });
+            });
+        </script>
+    </body>
+</html>
+

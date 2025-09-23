@@ -5,4 +5,4 @@ class YourAppConfig(AppConfig):
 
     def ready(self):
         import board.signals
-        print("Signal registered!")
+

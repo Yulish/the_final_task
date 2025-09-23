@@ -5,12 +5,12 @@
     <title>Отклик на объявление</title>
 </head>
 <body>
-    <h1>Отклик на объявление: {{ poster.title }}</h1>  <!-- Детали постера из контекста -->
+    <h1>Отклик на объявление: {{ poster.title }}</h1>
     <p>{{ poster.description }}</p>
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}  <!-- Форма ResponseForm (поле text) -->
+        {{ form.as_p }}
         <button type="submit">Отправить отклик</button>
     </form>
 

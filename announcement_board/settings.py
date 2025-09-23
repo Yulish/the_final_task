@@ -9,6 +9,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -48,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django_filters',
+    'django_apscheduler',
     'board.apps.BoardConfig',
     'allauth',
     'allauth.account',
@@ -59,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/posters'
 
 SITE_ID = 1
 
@@ -149,6 +155,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+SITE_URL = 'http://127.0.0.1:8000'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -159,6 +167,37 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
+
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Full',
+#         'contentsCss': ['/static/ckeditor/ckeditor/skins/moono-lisa/content.css'],
+#         'extraCss': 'img { width: 20% !important; height: auto !important; }',
+#         'extraPlugins': 'html5audio,html5video, embed, uploadfile',
+#         'filebrowserUploadUrl': '/ckeditor/upload/',
+#         'filebrowserImageUploadUrl': '/ckeditor/upload/?type=Images',
+#         'filebrowserVideoUploadUrl': '/ckeditor/upload/?type=Video',
+#         'filebrowserBrowseUrl': '/ckeditor/browse/',
+#         'filebrowserImageBrowseUrl': '/ckeditor/browse/?type=Images',
+#         'filebrowserVideoBrowseUrl': '/ckeditor/browse/?type=Video',
+#         'allowedContent': True,
+#         'html5video': {
+#             'formats': 'mp4,webm,ogg',
+#             'allowUrl': True,
+#             'width': '50%',
+#             'maxWidth': '640',
+#             'controls': True,
+#             'poster': False,
+#             'useSourceTag': True,
+#             'video': {
+#                 'attributes': {
+#                     'controls': 'controls',
+#                     'autoplay': '',
+#                 }
+#             }
+#         },
+#     }
+# }
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -186,5 +225,3 @@ CKEDITOR_CONFIGS = {
         },
     }
 }
-
-

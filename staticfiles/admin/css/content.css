@@ -1,0 +1,16 @@
+
+img {
+    width: 50%;      /* Основная ширина — 50% от контейнера */
+    height: auto;    /* Авто-высота для пропорций, без искажений */
+    /* Убери max-width и max-height, чтобы width сработал */
+}
+
+.cke_editable img {
+    width: 50%;      /* Аналогично для CKEditor */
+    height: auto;    /* Пропорции */
+    max-width: 100%; /* Ограничь максимум, если нужно */
+}
+
+p {
+    margin-bottom: 1em;
+}

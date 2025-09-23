@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Уведомление</title>
+</head>
+<body>
+<h>Здравствуйте! Новые публикации за неделю:</h>
+<ul>
+    {% for poster in posters %}
+        <li>
+            <h3>{{ poster.head }}</h3>
+            <a href="{{ link }}{% url 'poster_detail' poster.pk %}">Читать полностью</a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

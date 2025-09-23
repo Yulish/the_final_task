@@ -6,19 +6,6 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 
-
-class CreateForm(forms.ModelForm):
-
-    class Meta:
-        model = Poster
-        fields = ['head', 'text']
-        labels = {
-            'head': 'Заголовок',
-            # 'author': 'Автор',
-            'text': 'Введите текст',
-
-        }
-
 class Add_Change_Form(forms.ModelForm):
     class Meta:
         model = Poster
@@ -29,8 +16,10 @@ class Add_Change_Form(forms.ModelForm):
             'categories': 'Категория',
         }
         widgets = {
-            'text': CKEditorUploadingWidget(config_name='default'),  # Используйте вашу конфигурацию CKEditor
+            'text': CKEditorUploadingWidget(),
+
         }
+
 
     def save(self, commit=True, user=None):
         post = super().save(commit=False)

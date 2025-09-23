@@ -38,7 +38,7 @@ class Response(models.Model):
 
 
     def __str__(self):
-        return f"{self.response} был отправлен {self.response_origin} пользователем: {self.sender})"
+        return f'{self.response}'
 
     def get_detail_url(self):
         return reverse('response_detail', args=[str(self.id)])
@@ -54,13 +54,6 @@ class EmailVerification(models.Model):
 
 
 
-# class CommonSignupForm(SignupForm):
-#
-#     def save(self, request):
-#         user = super(CommonSignupForm, self).save(request)
-#         common_group = Group.objects.get(name='common')
-#         common_group.user_set.add(user)
-#         return user
 
 
 
