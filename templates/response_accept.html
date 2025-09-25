@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Принять отклик</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Принять отклик{% endblock %}
+
+
+{% block content %}
     <h1>Принять отклик</h1>
     <p><strong><a href="{% url 'poster_detail' poster.id %}">На объявление:</a> {{ poster.head }}</strong></p>
     <p><strong>От:</strong> {{ response.sender }}</p>
@@ -17,5 +16,4 @@
     </form>
 
         <a href="{% url 'responses' user.id %}"> "Отклики на мои объявления"</a>
-</body>
-</html>
+{% endblock content %}

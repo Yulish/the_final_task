@@ -168,43 +168,15 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
 
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'Full',
-#         'contentsCss': ['/static/ckeditor/ckeditor/skins/moono-lisa/content.css'],
-#         'extraCss': 'img { width: 20% !important; height: auto !important; }',
-#         'extraPlugins': 'html5audio,html5video, embed, uploadfile',
-#         'filebrowserUploadUrl': '/ckeditor/upload/',
-#         'filebrowserImageUploadUrl': '/ckeditor/upload/?type=Images',
-#         'filebrowserVideoUploadUrl': '/ckeditor/upload/?type=Video',
-#         'filebrowserBrowseUrl': '/ckeditor/browse/',
-#         'filebrowserImageBrowseUrl': '/ckeditor/browse/?type=Images',
-#         'filebrowserVideoBrowseUrl': '/ckeditor/browse/?type=Video',
-#         'allowedContent': True,
-#         'html5video': {
-#             'formats': 'mp4,webm,ogg',
-#             'allowUrl': True,
-#             'width': '50%',
-#             'maxWidth': '640',
-#             'controls': True,
-#             'poster': False,
-#             'useSourceTag': True,
-#             'video': {
-#                 'attributes': {
-#                     'controls': 'controls',
-#                     'autoplay': '',
-#                 }
-#             }
-#         },
-#     }
-# }
-
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
+        'contentsCss': ['/static/ckeditor/ckeditor/skins/moono-lisa/content.css'],
+        'extraCss': 'img { width: 20% !important; height: auto !important; }',
         'extraPlugins': 'html5audio,html5video, embed, uploadfile',
         'filebrowserUploadUrl': '/ckeditor/upload/',
         'filebrowserImageUploadUrl': '/ckeditor/upload/?type=Images',
+        'filebrowserVideoUploadUrl': '/ckeditor/upload/?type=Video',
         'filebrowserBrowseUrl': '/ckeditor/browse/',
         'filebrowserImageBrowseUrl': '/ckeditor/browse/?type=Images',
         'filebrowserVideoBrowseUrl': '/ckeditor/browse/?type=Video',
@@ -212,6 +184,7 @@ CKEDITOR_CONFIGS = {
         'html5video': {
             'formats': 'mp4,webm,ogg',
             'allowUrl': True,
+            'width': '50%',
             'maxWidth': '640',
             'controls': True,
             'poster': False,
@@ -225,3 +198,30 @@ CKEDITOR_CONFIGS = {
         },
     }
 }
+
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'full',
+#         'extraPlugins': 'html5audio,html5video, embed, uploadfile',
+#         'filebrowserUploadUrl': '/ckeditor/upload/',
+#         'filebrowserImageUploadUrl': '/ckeditor/upload/?type=Images',
+#         'filebrowserBrowseUrl': '/ckeditor/browse/',
+#         'filebrowserImageBrowseUrl': '/ckeditor/browse/?type=Images',
+#         'filebrowserVideoBrowseUrl': '/ckeditor/browse/?type=Video',
+#         'allowedContent': True,
+#         'html5video': {
+#             'formats': 'mp4,webm,ogg',
+#             'allowUrl': True,
+#             'maxWidth': '640',
+#             'controls': True,
+#             'poster': False,
+#             'useSourceTag': True,
+#             'video': {
+#                 'attributes': {
+#                     'controls': 'controls',
+#                     'autoplay': '',
+#                 }
+#             }
+#         },
+#     }
+# }

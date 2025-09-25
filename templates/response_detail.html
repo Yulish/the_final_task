@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 {% block content %}
 <h1>Отклик на <a href="{% url 'poster_detail' poster.id %}">Ваше объявление</a></h1>
 <p><strong>Текст:</strong> {{ response_id.response }}</p>

@@ -206,9 +206,3 @@ a > img {
 	max-height: 1080px;
 	margin:0 auto;
 }
-/* Стили для изображений в CKEditor */
-img {
-    width: 20% !important;      /* Маленький размер — 20% от контейнера */
-    height: auto !important;    /* Сохраняет пропорции */
-    max-width: 100% !important; /* Не выходит за рамки */
-}

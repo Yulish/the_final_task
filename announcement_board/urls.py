@@ -32,7 +32,6 @@ urlpatterns = [
     path('responses/accepted/', AcceptedResponses.as_view(), name='accepted_responses'),
     path('responses/<int:pk>/delete/', ResponseDelete.as_view(), name='response_delete'),
     path('categories/<int:pk>/', PosterCategory.as_view(), name='category_list'),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('ckeditor/upload/', custom_upload, name='ckeditor_upload'),
 
 ]

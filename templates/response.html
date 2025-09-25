@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Отклик на объявление</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Отклик на объявление{% endblock %}
+
+{% block content %}
     <h1>Отклик на объявление: {{ poster.title }}</h1>
     <p>{{ poster.description }}</p>
 
@@ -15,5 +13,4 @@
     </form>
 
     <a href="{% url 'poster_detail' poster.pk %}">Вернуться к объявлению</a>
-</body>
-</html>
+{% endblock %}
