@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.views import View
 from django.contrib import messages
-from django.contrib.auth import get_user_model, logout
+from django.contrib.auth import get_user_model, logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -335,6 +335,8 @@ def verify_code_view(request, user_id):
             messages.error(request, 'Неверный код.')
         return redirect('register')
     return render(request, 'verify_code.html', {'user_id': user_id})
+
+
 
 # для отмены ограничения по добавлению медиа
 def custom_upload(request):

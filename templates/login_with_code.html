@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Вход с одноразовым кодом</title>
-</head>
-<body>
+{% block title %}Вход с одноразовым кодом{% endblock %}
+{% block content %}
     <h1>Введите одноразовый код</h1>
 
     {% if messages %}
@@ -28,5 +23,4 @@
     </form>
 
     <p><a href="{% url 'account_login' %}">Вернуться к обычному входу</a></p>
-</body>
-</html>
+{% block content %}
